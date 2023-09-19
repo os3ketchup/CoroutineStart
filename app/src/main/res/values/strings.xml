@@ -3,4 +3,6 @@
     <string name="downlaod">DOWNLOAD</string>
     <string name="city">City:</string>
     <string name="temperature">temperature:</string>
+    <string name="enter">enter</string>
+    <string name="_100">100</string>
 </resources>

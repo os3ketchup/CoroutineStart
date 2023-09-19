@@ -1,13 +1,10 @@
 package uz.os3ketchup.coroutinestart
 
-import android.content.Context
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
-import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import androidx.lifecycle.ViewModelProvider
 import uz.os3ketchup.coroutinestart.databinding.ActivityMainBinding
 
 
@@ -16,41 +13,41 @@ class MainActivity : AppCompatActivity() {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
+    private val viewModel by lazy {
+        ViewModelProvider(this)[MainViewModel::class.java]
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        observeViewModel()
+        binding.btnEnter.setOnClickListener {
+            viewModel.calculate(binding.etNumber.text.toString())
+        }
+    }
 
-        binding.btnDownload.setOnClickListener {
-            lifecycleScope.launch {
-                loadData()
+    private fun observeViewModel() {
+        viewModel.state.observe(this) {
+            binding.progressBar.visibility = View.GONE
+            binding.btnEnter.isEnabled = true
+
+            when (it) {
+                is Error -> {
+                    Toast.makeText(this, "you did not enter value", Toast.LENGTH_SHORT).show()
+                }
+
+                is Progress -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                    binding.btnEnter.isEnabled = false
+                }
+
+                is Factorial -> {
+                    binding.tvNumber.text = it.value
+                }
             }
         }
-
-    }
-
-    private suspend fun loadData() {
-        binding.progressBar.isVisible = true
-        binding.btnDownload.isEnabled = false
-        val name = loadCity()
-        binding.tvCity.text = name
-        val temperature = loadTemperature(this, name)
-        binding.tvTemp.text = temperature.toString()
-        binding.progressBar.isVisible = false
-        binding.btnDownload.isEnabled = true
-
-
     }
 }
 
- private suspend fun loadTemperature(context: Context, city: String): Int {
-    Toast.makeText(context, city, Toast.LENGTH_SHORT).show()
-    delay(5000)
-    return 17
 
-}
-
-private suspend fun loadCity(): String {
-    delay(5000)
-    return "London"
-}

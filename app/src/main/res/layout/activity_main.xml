@@ -6,64 +6,50 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/tv_city_label"
-        style="@style/TextAppearance.AppCompat.Medium"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/et_number"
+        android:inputType="number"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="4dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="@string/city" />
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_city"
-        style="@style/TextAppearance.AppCompat.Medium"
+    <Button
+        android:id="@+id/btn_enter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="4dp"
-        app:layout_constraintLeft_toRightOf="@id/tv_city_label"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="London" />
+        android:text="@string/enter"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_number" />
 
-    <TextView
-        android:id="@+id/tv_temp_label"
-        style="@style/TextAppearance.AppCompat.Medium"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="4dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_city_label"
-        android:text="@string/temperature" />
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_enter">
 
-    <TextView
-        android:id="@+id/tv_temp"
-        style="@style/TextAppearance.AppCompat.Medium"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="4dp"
-        app:layout_constraintLeft_toRightOf="@id/tv_temp_label"
-        app:layout_constraintTop_toBottomOf="@id/tv_city"
-        tools:text="17" />
+        <TextView
+            android:id="@+id/tv_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/_100"
+            android:textSize="24sp" />
+    </ScrollView>
 
     <ProgressBar
-        android:id="@+id/progress_bar"
-        android:visibility="gone"
+        android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btn_download"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        android:text="@string/downlaod"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
